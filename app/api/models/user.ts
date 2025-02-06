@@ -1,7 +1,21 @@
-import { DataTypes } from "sequelize";
+import {
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from "sequelize";
 import sequelize from "@/lib/sequelize";
 
-const User = sequelize.define("User", {
+interface UserAttributes
+  extends Model<
+    InferAttributes<UserAttributes>,
+    InferCreationAttributes<UserAttributes>
+  > {
+  id: number;
+  name: string;
+}
+
+const User = sequelize.define<UserAttributes>("User", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
